@@ -9,7 +9,7 @@ void push(char a)
 {
     if(tos==MAX-1)
     {
-        printf("/nStack Overflow");
+        printf("\nStack Overflow");
         return;
     }
     tos++;
@@ -17,15 +17,18 @@ void push(char a)
     
 }
 
-void pop(char a)
+void pop()
 {
+    char a;
     if(tos==-1)
     {
-        printf("/nStack Underflow");
+        printf("\nStack Underflow");
         return;
     }
-    printf("%c",a);
+    a=stack[tos];
     tos--;
+    printf("%c",a);
+    
 }
 int precedence(char a)
 {
@@ -41,6 +44,10 @@ int precedence(char a)
             else if(a=='+' || a=='-')
             {
                 precedence=1;
+            }
+            else if(a=='(')
+            {
+                precedence=0;
             }
 return precedence;
             
@@ -59,6 +66,16 @@ int main()
         {
             printf("%c",expr[i]);
         }
+        else if (expr[i]=='(')
+            {
+                push(expr[i]);
+            }
+        else if (expr[i]==')')
+            {
+                while(stack[tos]!='(')
+                {pop();}
+                tos--;
+            }
         else
         {
             if(tos==-1 || precedence(expr[i])>precedence(stack[tos]))
@@ -67,11 +84,17 @@ int main()
             }
             else
             {
-                while(precedence(expr[i])<=precedence(stack[tos]))
-                {pop(expr[i]);}
+                while(precedence(expr[i])<=precedence(stack[tos]) && tos!=-1)
+                {
+                    pop();
+                }
                 push(expr[i]);
             }
         }
+    }
+    while(tos!=-1)
+    {
+        pop();
     }
     
     return 0;
