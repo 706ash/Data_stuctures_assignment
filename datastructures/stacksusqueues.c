@@ -4,7 +4,7 @@ int q1[MAX],q2[MAX],*q1front=NULL,*q1rear=NULL;
 
 void enqueue()
 {
-    if(q1front==NULL)
+    if(q1rear==NULL)
     {
         q1front=q1rear=&q1[0];
     }
@@ -18,18 +18,12 @@ void enqueue()
 }
 void display()
 {
-    int *front;
-    front=q1front;
-    if(front=q1rear)
+    for (int *i = q1front; i <=q1rear ; i++)
     {
-        printf("%d",*front);
-        return;
+        printf("%d\t",*i);
     }
-    while (front!=q1rear)
-    {
-        printf("%d",*front);
-        front++;
-    }
+
+    
     
 }
 int main()
