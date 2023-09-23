@@ -1,39 +1,51 @@
 #include<stdio.h>
+#include<stdlib.h>
 #define MAX 2
-int count=0;
-int q1[MAX],q2[MAX],*q1front=NULL,*q1rear=NULL;
 
-void enqueue()
+
+
+void enqueue(int *q,int *pfront,int *prear,int data)
 {
-    if(count==MAX)
+    if(*prear==MAX-1)
     {
         printf("\nQueue Overflow");
         return;
     }
-    if(q1rear==NULL)
+    if(*pfront==-1)
     {
-        q1front=q1rear=&q1[0];
+        (*pfront)++;
     }
-    else
-    {
-        q1rear++;
-    }
-    int data;
-    printf("\nEnter data: ");
-    scanf("%d",&*q1rear);
-    count++;
+    (*prear)++;
+    *(q + *prear)=data;
+    
+
 }
 
-void dequeue(int *pointer)
+void dequeue(int *q,int *pfront,int *prear)
 {
-
+    if(*prear==-1)
+    {
+        printf("\nQueue Underflow");
+        return;
+    }
+    int temp=*(q+*pfront);
+    
+    printf("\nThe deleted element is: %d",temp);
+    if(*pfront==*prear)
+    {
+        *pfront=*prear=-1;
+    }
+    else{
+        (*pfront)++;
+    }
 }
-void display()
+
+void display(int *q1,int *pfront,int *prear)
 {
     printf("\n");
-    for (int *i = q1front; i <=q1rear ; i++)
+    for (int i = *pfront; i <=*prear ; i++)
     {
-        printf("%d\t",*i);
+        printf("%d\t",*(q1+i));
     }
     printf("\n");
 
@@ -42,8 +54,8 @@ void display()
 }
 int main()
 {
-    int c;
-    int o;
+    int q1[MAX],q2[MAX],q1front=-1,q1rear=-1,q2front=-1,q2rear=-1;
+    int c,o,data;
     do
     {
         printf("Enter 1 to push an element\nEnter 2 to pop an element\n");
@@ -51,14 +63,16 @@ int main()
         switch (o)
         {
         case 1:
-            enqueue();
-            display();
+            printf("\nEnter data: ");
+            scanf("%d",&data);
+            enqueue(&q1[0],&q1front,&q1rear,data);
+            display(&q1[0],&q1front,&q1rear);
             break;
         case 2:
-            dequeue(q1front);
-            display();
-            break;    
-        
+            dequeue(&q1[0],&q1front,&q1rear);
+            if(q1rear!=-1)
+                display(&q1[0],&q1front,&q1rear);
+            break;
         
         default:
             printf("\nWrong choice");
