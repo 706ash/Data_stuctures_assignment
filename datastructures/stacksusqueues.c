@@ -1,9 +1,15 @@
 #include<stdio.h>
-#define MAX 9
+#define MAX 2
+int count=0;
 int q1[MAX],q2[MAX],*q1front=NULL,*q1rear=NULL;
 
 void enqueue()
 {
+    if(count==MAX)
+    {
+        printf("\nQueue Overflow");
+        return;
+    }
     if(q1rear==NULL)
     {
         q1front=q1rear=&q1[0];
@@ -15,13 +21,21 @@ void enqueue()
     int data;
     printf("\nEnter data: ");
     scanf("%d",&*q1rear);
+    count++;
+}
+
+void dequeue(int *pointer)
+{
+
 }
 void display()
 {
+    printf("\n");
     for (int *i = q1front; i <=q1rear ; i++)
     {
         printf("%d\t",*i);
     }
+    printf("\n");
 
     
     
@@ -32,7 +46,7 @@ int main()
     int o;
     do
     {
-        printf("Enter 1 to push an element\nEnter 2 to pop an element");
+        printf("Enter 1 to push an element\nEnter 2 to pop an element\n");
         scanf("%d",&o);
         switch (o)
         {
@@ -40,6 +54,10 @@ int main()
             enqueue();
             display();
             break;
+        case 2:
+            dequeue(q1front);
+            display();
+            break;    
         
         
         default:
