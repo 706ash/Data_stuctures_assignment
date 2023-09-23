@@ -21,16 +21,10 @@ void enqueue(int *q,int *pfront,int *prear,int data)
 
 }
 
-void dequeue(int *q,int *pfront,int *prear)
+int dequeue(int *q,int *pfront,int *prear)
 {
-    if(*prear==-1)
-    {
-        printf("\nQueue Underflow");
-        return;
-    }
+
     int temp=*(q+*pfront);
-    
-    printf("\nThe deleted element is: %d",temp);
     if(*pfront==*prear)
     {
         *pfront=*prear=-1;
@@ -38,6 +32,7 @@ void dequeue(int *q,int *pfront,int *prear)
     else{
         (*pfront)++;
     }
+    return temp;
 }
 
 void display(int *q1,int *pfront,int *prear)
@@ -69,9 +64,21 @@ int main()
             display(&q1[0],&q1front,&q1rear);
             break;
         case 2:
+            int a;
+            for(int i = 0 ; i < q1rear ; i++)
+            {
+                enqueue(&q2[0],&q2front,&q2rear,dequeue(&q1[0],&q1front,&q1rear));
+            }
             dequeue(&q1[0],&q1front,&q1rear);
+            for(int i = 0 ; i <= q2rear ; i++)
+            {
+                enqueue(&q1[0],&q1front,&q1rear,dequeue(&q2[0],&q2front,&q2rear));
+            }
             if(q1rear!=-1)
-                display(&q1[0],&q1front,&q1rear);
+                {display(&q1[0],&q1front,&q1rear);}
+            else{
+                printf("\nQueue Underflow");
+            }
             break;
         
         default:
