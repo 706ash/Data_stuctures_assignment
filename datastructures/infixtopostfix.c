@@ -30,14 +30,16 @@ void pop()
     printf("%c",a);
     
 }
-int precedence(char a)
+int precedence(char a,char b)
 {
+    
     int precedence;
-            if(a=='$')
+            if(a=='+'&& b=='+' || a=='-' && b=='-')
             {
-                precedence=3;
+            precedence=3;
             }
-            else if(a=='*' || a=='/')
+
+            else if(a=='*' || a=='/' || a=='$')
             {
                 precedence=2;
             }
@@ -78,17 +80,37 @@ int main()
             }
         else
         {
-            if(tos==-1 || precedence(expr[i])>precedence(stack[tos]))
+            if (precedence(expr[i],expr[i-1])!=3)
             {
-                push(expr[i]);
+            if(tos==-1 || precedence(expr[i],expr[i+1])>precedence(stack[tos],stack[tos+1]))
+            {
+                if(precedence(expr[i],expr[i+1])==3)
+                {   push(expr[i]);
+                    push(expr[i+1]);
+                    
+                }
+                else
+                    push(expr[i]);
+
             }
             else
             {
-                while(precedence(expr[i])<=precedence(stack[tos]) && tos!=-1)
+                while(precedence(expr[i],expr[i+1])<=precedence(stack[tos],stack[tos+1]) && tos!=-1)
                 {
+                    if(precedence(expr[i],expr[i+1])==3)
+                    {   
                     pop();
+                    pop();
+                    }
+                    else if (precedence(expr[i],expr[i-1])==3)
+                {
+                    break;
+                }
+                    else
+                        pop();
                 }
                 push(expr[i]);
+            }
             }
         }
     }
