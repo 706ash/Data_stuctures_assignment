@@ -86,8 +86,7 @@ int main()
             {
                 if(precedence(expr[i],expr[i+1])==3)
                 {   push(expr[i]);
-                    push(expr[i+1]);
-                    
+                    push(expr[i+1]); 
                 }
                 else
                     push(expr[i]);
