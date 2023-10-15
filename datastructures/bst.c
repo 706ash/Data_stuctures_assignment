@@ -7,37 +7,29 @@ struct node
     struct node *left,*right;
 };
 
-struct node* insert(int parent,int child,struct node *root)
+struct node *make_a_node(int child) //Function to make a ,node insert data to that node and return a pointer to that node
 {
     struct node *temp;
-    if(child<parent)
+    temp=(struct node *)malloc(sizeof(struct node));
+    temp->data=child;
+    return temp;
+}
+struct node* insert(int child,struct node *root) // function to recursively transverse and insert data in a binary search tree
+{
+    if(root==NULL) //if the present root node does not exist then make one
     {
-        if(root->left==NULL)
-        {
-            temp=(struct node *)malloc(sizeof(struct node));
-            temp->data=child;
-            root->left=temp;
-            return temp;
-        }
-        root=root->left;
-        root->left=insert(root->data,child,root);
-        
+        root = make_a_node(child);
+        return root;
     }
-    else
-    {
-        if(root->right==NULL)
-        {
-            temp=(struct node *)malloc(sizeof(struct node));
-            temp->data=child;
-            root->right=temp;
-            return temp;
-        }
-        root=root->right;
-        root->right=insert(root->data,child,root);
-        
-    }
-    return root;
-
+   else if (child < root->data)
+   {
+        root->left=insert(child,root->left);
+   }
+   else if (child > root->data)
+   {
+        root->right=insert(child,root->right);
+   }
+   return root;
 }
 
 void preorder(struct node *root)
@@ -53,21 +45,10 @@ int main()
 {
     int data,child,con;
     struct node *root=NULL;
-    printf("\nEnter data to be inserted in root node: ");
-    scanf("%d",&data);
-    root=(struct node *)malloc(sizeof(struct node));
-    root->data=data;
     do{
     printf("\nEnter data to be inserted in bst: ");
     scanf("%d",&child);
-    if(child < data)
-    {
-        root->left=insert(data,child,root);
-    }
-    else
-    {
-        root->right=insert(data,child,root);
-    }
+    root=insert(child,root);
     printf("\nDo you want to continue(1/0): ");
     scanf("%d",&con);
     }
