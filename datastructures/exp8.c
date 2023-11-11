@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include<math.h>
 int hash[100];
 void display(int m)
 {
@@ -63,6 +64,14 @@ void folding(int *keys,int n)
     }
 }
 
+void midsquare(int *keys,int n)
+{
+    int d;
+    for(int i=0;i<n;i++)
+    {
+        d=(log10(keys[i])+1)/3;
+    }
+}
 
 int main()
 {
@@ -88,12 +97,12 @@ int main()
             trunication(&keys[0],n);
             break;
         case 3:
-            //midsquare();
+            midsquare();
             break;
         case 4:
             folding(&keys[0],n);
             break;
-        default:36 18 72 43 6
+        default:
             printf("\nWrong choice");
             break;
         }
