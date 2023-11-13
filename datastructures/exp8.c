@@ -66,11 +66,18 @@ void folding(int *keys,int n)
 
 void midsquare(int *keys,int n)
 {
-    int d;
+    int d,e,temp,a;
     for(int i=0;i<n;i++)
     {
-        d=(log10(keys[i])+1)/3;
+        d=(log10(keys[i])); // d stores the value of the number of digits of the number
+        a=round(d/3); // we divide no of digits by 3 inorder to make 3 sections of the number
+        e=d - 2*a;
+        temp=keys[i];
+        temp=temp/(10^a);
+        temp=(temp % (10^e))^2;
+        hash[temp]=keys[i];
     }
+    display(10);
 }
 
 int main()
@@ -97,7 +104,7 @@ int main()
             trunication(&keys[0],n);
             break;
         case 3:
-            midsquare();
+            midsquare(&keys[0],n);
             break;
         case 4:
             folding(&keys[0],n);
