@@ -69,7 +69,7 @@ void midsquare(int *keys,int n)
     int d,e,temp,a;
     for(int i=0;i<n;i++)
     {
-        d=(log10(keys[i])); // d stores the value of the number of digits of the number
+        d=(log10(keys[i])+1); // d stores the value of the number of digits of the number
         a=round(d/3); // we divide no of digits by 3 inorder to make 3 sections of the number
         e=d - 2*a;
         temp=keys[i];
