@@ -20,7 +20,7 @@ int main()
     cout<<"\nAfter swapping the value of a is "<<a<<" b is"<<b; 
     cout<<"\nEnter floating values of c and d to be swapped: ";
     cin>>c>>d;
-    swap(c,d);
+    swap(&c,&d);
     cout<<"\nAfter swapping the value of c is "<<c<<" d is"<<d;
     return 0;
 }
