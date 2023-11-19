@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include<math.h>
-int hash[100];
-void display(int m)
+void display(int m,int *hash)
 {
+    printf("\n                     HASH TABLE\n");
     for(int i=0;i<m;i++)
     {
         if(hash[i]==0)
@@ -17,35 +17,30 @@ void display(int m)
 }
 void division(int *keys,int n)
 {
+    int hash[10]={0};
     int k;
     int m=8;
     for(int i=0;i<n;i++)
     {
         hash[keys[i]%m]=keys[i];
     }
-    display(m);
-    for(int i=0;i<n;i++)
-    {
-        hash[keys[i]%m]=0;
-    }
+    display(m,&hash[0]);
+    
 }
 
 void trunication(int *keys,int n)
 {
+    int hash[10]={0};
     for(int i=0;i<n;i++)
     {
         hash[keys[i]/10]=keys[i];
     }
-    display(8);
-    for(int i=0;i<n;i++)
-    {
-        hash[keys[i]/10]=0;
-    }
+    display(8,&hash[0]);
 }
 
 void folding(int *keys,int n)
 {
-    int sum=0,temp;
+    int sum=0,temp,hash[10]={0};
     for(int i=0;i<n;i++)
     {
         temp=keys[i];
@@ -57,34 +52,33 @@ void folding(int *keys,int n)
         hash[sum]=keys[i];
         sum=0;
     }
-    display(10);
-    for(int i=0;i<n;i++)
-    {
-        hash[keys[i]/10]=0;
-    }
+    display(10,&hash[0]);
 }
 
 void midsquare(int *keys,int n)
 {
-    int d,e,temp,a;
+    int hash[10]={0};
+    int no_of_digits,e,temp,a;
     for(int i=0;i<n;i++)
     {
-        d=(log10(keys[i])+1); // d stores the value of the number of digits of the number
-        a=round(d/3); // we divide no of digits by 3 inorder to make 3 sections of the number
-        e=d - 2*a;
+        no_of_digits=(log10(keys[i])+1); // no_of-digits stores the value of the number of digits of the number
+        a=round(no_of_digits/3); // we divide no of digits by 3 inorder to make 3 sections of the number
+        e=no_of_digits - 2*a; 
         temp=keys[i];
-        temp=temp/(10^a);
-        temp=(temp % (10^e))^2;
+        temp=temp/pow(10,a);
+        temp=pow(temp % (int)pow(10,e),2);
         hash[temp]=keys[i];
     }
-    display(10);
+    display(10,&hash[0]);
 }
 
 int main()
 {
     int n,o,con;
     int keys[100];
-    printf("\nEnter the no of keys: ");
+
+    do{
+        printf("\nEnter the no of keys: ");
     scanf("%d",&n);
 
     printf("\nEnter the keys: ");
@@ -92,8 +86,7 @@ int main()
     {
         scanf("%d",&keys[i]);
     }
-    do{
-        printf("\nEnter 1 for division method\nEnter 2 for trunication\nEnter 3 for Midsquare method\nEnter 4 for folding method");
+        printf("\nEnter 1 for division method\nEnter 2 for trunication\nEnter 3 for Midsquare method\nEnter 4 for folding method\nEnter your choice: ");
         scanf("%d",&o);
         switch (o)
         {
@@ -113,7 +106,7 @@ int main()
             printf("\nWrong choice");
             break;
         }
-        printf("\nDo you want to continue(1/0)");
+        printf("\nDo you want to continue(1/0): ");
         scanf("%d",&con);
     }
     while(con==1);
