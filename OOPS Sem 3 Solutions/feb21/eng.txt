@@ -1,0 +1,7 @@
+
+Name: sacnajs
+address: asn
+Course: engineering
+Name: dsja
+address: ascna
+Course: medicine

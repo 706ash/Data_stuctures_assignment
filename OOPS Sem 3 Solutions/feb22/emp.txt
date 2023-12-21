@@ -1,0 +1,12 @@
+
+Name: ash
+Designation: margao
+address: ssss
+salary: 2321
+Emp_id: 1001
+
+Name: adszs
+Designation: engineer
+address: fatorda
+salary: 50000
+Emp_id: 1002

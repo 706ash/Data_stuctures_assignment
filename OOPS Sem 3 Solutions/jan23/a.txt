@@ -1,0 +1,2 @@
+file is opened in write mode
+This file is opened in append mode so prvious data is not overwritten
