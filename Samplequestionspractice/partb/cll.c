@@ -78,7 +78,7 @@ void addatpos()
 
     temp=(struct node *)malloc(sizeof(struct node));
     temp->data=data;
-    for (int i = 1; i < pos; i++) // for loop for moving r to the required position
+    for (int i = 0; i < pos; i++) // for loop for moving r to the required position
     {
         if(r->next!=q) //if the next node not head then move r 1 pos ahead else print pos not found
             r=r->next;
