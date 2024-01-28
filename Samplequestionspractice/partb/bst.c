@@ -14,6 +14,7 @@ struct node* createanode(int child)
     temp->right=NULL;
     return temp;    
 }
+
 struct node* insert(struct node *root,int child)
 {
     if(root==NULL)

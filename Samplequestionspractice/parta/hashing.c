@@ -51,9 +51,9 @@ void midsq(int keys[],int n)
         a=round(no_of_digits/3);
         e=no_of_digits-2*a;
         temp=keys[i];
-        temp=temp/pow(10,a);
+        temp/=pow(10,a);
         temp=temp%(int)pow(10,e);
-        hash[temp]=keys[i];
+        hash[temp*temp]=keys[i];
     }
     display(10);
     emptyhash();
@@ -107,6 +107,7 @@ int main()
         case 4:
             fold(keys,n);
             break;
+
         default:
             printf("\nWrong choice");
             break;

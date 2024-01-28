@@ -79,7 +79,7 @@ int main()
         switch (o)
         {
         case 1:
-            root = insert(root);
+            root = insert();
             break;
         
         case 2:

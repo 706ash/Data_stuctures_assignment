@@ -17,7 +17,7 @@ void push(char a)
     stack[tos]=a;
 }
 
-int pop()
+char pop()
 {
     if(tos==-1)
     {
